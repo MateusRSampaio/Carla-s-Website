@@ -10,7 +10,10 @@
 <body>
   <header class="site-header">
     <a class="site-logo" href="index.html">Carla Cardoso Uchôa</a>
-    <nav aria-label="Main navigation">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+      Menu
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfólio</a>
       <a href="about.html">Sobre</a>
@@ -26,14 +29,21 @@
         <p class="intro">Conte-me um pouco sobre o seu projeto e eu voltarei a você em breve.</p>
         <p class="intro">Você também pode me encontrar nas redes sociais: @carlauchoafotografia.</p>
       </div>
-      <form class="contact-form">
+      <form class="contact-form" novalidate>
         <label for="name">Nome</label>
         <input id="name" name="name" type="text" required>
+        <span class="error-message" data-error-for="name"></span>
+
         <label for="email">Email</label>
         <input id="email" name="email" type="email" required>
+        <span class="error-message" data-error-for="email"></span>
+
         <label for="message">Mensagem</label>
         <textarea id="message" name="message" rows="6" required></textarea>
+        <span class="error-message" data-error-for="message"></span>
+
         <button class="button" type="submit">Envie uma mensagem</button>
+        <p class="form-success" aria-live="polite"></p>
       </form>
     </div>
   </main>
