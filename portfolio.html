@@ -10,7 +10,10 @@
 <body>
   <header class="site-header">
     <a class="site-logo" href="index.html">Carla Cardoso Uchôa</a>
-    <nav aria-label="Main navigation">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+      Menu
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="portfolio.html" aria-current="page">Portfólio</a>
       <a href="about.html">Sobre</a>
@@ -19,22 +22,81 @@
   </header>
 
   <main class="page-content">
-    <p class="eyebrow">Selecione o trabalho</p>
+    <p class="eyebrow">Meus trabalhos</p>
     <h1>Portfolio</h1>
-    <section class="gallery" aria-label="Photography gallery">
-      <figure class="gallery-item" data-title="Portrait study" data-caption="Portrait of a woman wearing a black top and white trousers">
-        <img src="assets/images/Carla1.jpg" alt="Portrait of a woman wearing a black top and white trousers">
-        <figcaption>Fotos de estúdio <span>01</span></figcaption>
-      </figure>
-      <figure class="gallery-item" data-title="Movement in light" data-caption="Dancer in white clothing moving through a bright room">
-        <img src="assets/images/Carla2.jpg" alt="Dancer in white clothing moving through a bright room">
-        <figcaption>Movimento <span>02</span></figcaption>
-      </figure>
-      <figure class="gallery-item" data-title="Everyday portrait" data-caption="Portrait of a woman wearing a white cap and navy top">
-        <img src="assets/images/Carla3.jpg" alt="Portrait of a woman wearing a white cap and navy top">
-        <figcaption>Algum estilo aqui <span>03</span></figcaption>
-      </figure>
-    </section>
+    <div class="albums">
+      <section class="album" aria-labelledby="lire-photos-title">
+        <div class="album-heading">
+          <span class="album-index">01</span>
+          <div>
+            <h2 id="lire-photos-title">Lire Photos - Studio</h2>
+            <p>Descrição do album</p>
+          </div>
+        </div>
+        <div class="gallery" aria-label="Lire Photos - Studio gallery">
+          <figure class="gallery-item" data-title="Lire Photos - Studio" data-caption="Studio portrait in black and white">
+            <img src="assets/images/Carla1.jpg" alt="Portrait of a woman wearing a black top and white trousers">
+            <figcaption>Titulo para foto <span>01</span></figcaption>
+          </figure>
+          <figure class="gallery-item" data-title="Lire Photos - Studio" data-caption="Fashion portrait with a white cap">
+            <img src="assets/images/Carla3.jpg" alt="Portrait of a woman wearing a white cap and navy top">
+            <figcaption>Titulo para foto <span>02</span></figcaption>
+          </figure>
+          <figure class="gallery-item" data-title="Lire Photos - Studio" data-caption="A repeated studio test image">
+            <img src="assets/images/Carla1.jpg" alt="Portrait of a woman wearing a black top and white trousers">
+            <figcaption>Titulo para foto <span>03</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="album" aria-labelledby="dance-crew-title">
+        <div class="album-heading">
+          <span class="album-index">02</span>
+          <div>
+            <h2 id="dance-crew-title">Dance Crew</h2>
+            <p>Descrição do album</p>
+          </div>
+        </div>
+        <div class="gallery" aria-label="Dance Crew gallery">
+          <figure class="gallery-item" data-title="Dance Crew" data-caption="Dancer moving through a bright room">
+            <img src="assets/images/Carla2.jpg" alt="Dancer in white clothing moving through a bright room">
+            <figcaption>Titulo para foto <span>01</span></figcaption>
+          </figure>
+          <figure class="gallery-item" data-title="Dance Crew" data-caption="A repeated movement test image">
+            <img src="assets/images/Carla2.jpg" alt="Dancer in white clothing moving through a bright room">
+            <figcaption>Titulo para foto <span>02</span></figcaption>
+          </figure>
+          <figure class="gallery-item" data-title="Dance Crew" data-caption="Portrait between movements">
+            <img src="assets/images/Carla3.jpg" alt="Portrait of a woman wearing a white cap and navy top">
+            <figcaption>Titulo para foto <span>03</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="album" aria-labelledby="making-of-title">
+        <div class="album-heading">
+          <span class="album-index">03</span>
+          <div>
+            <h2 id="making-of-title">Making Of</h2>
+            <p>Os bastidores, os encontros e o processo criativo.</p>
+          </div>
+        </div>
+        <div class="gallery" aria-label="Making Of gallery">
+          <figure class="gallery-item" data-title="Making Of" data-caption="Carla behind the camera">
+            <img src="assets/images/Carla4.jpg" alt="Carla Cardoso Uchôa smiling while holding a camera and smartphone">
+            <figcaption>Titulo para foto <span>01</span></figcaption>
+          </figure>
+          <figure class="gallery-item" data-title="Making Of" data-caption="A repeated behind-the-scenes test image">
+            <img src="assets/images/Carla4.jpg" alt="Carla Cardoso Uchôa smiling while holding a camera and smartphone">
+            <figcaption>Titulo para foto <span>02</span></figcaption>
+          </figure>
+          <figure class="gallery-item" data-title="Making Of" data-caption="A portrait from the creative process">
+            <img src="assets/images/Carla1.jpg" alt="Portrait of a woman wearing a black top and white trousers">
+            <figcaption>Titulo para foto <span>03</span></figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
   </main>
 
   <div class="lightbox" aria-hidden="true" aria-label="Image preview">
@@ -46,7 +108,7 @@
   </div>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Carla Cardoso Uchôa</p>
+    <p>&copy; 2026 Carla Cardoso Uchôa (@carlauchoafotografia)</p>
   </footer>
   <script src="js/main.js"></script>
 </body>
