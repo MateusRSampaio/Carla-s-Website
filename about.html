@@ -10,7 +10,10 @@
 <body>
   <header class="site-header">
     <a class="site-logo" href="index.html">Carla Cardoso Uchôa</a>
-    <nav aria-label="Main navigation">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+      Menu
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfólio</a>
       <a href="about.html" aria-current="page">Sobre</a>
@@ -23,13 +26,33 @@
     <div class="about-layout">
       <div>
         <h1>Sobre</h1>
-        <p class="intro">(biografia aqui.</p>
+        <p class="intro">Uma breve biografia será adicionada aqui, destacando a visão artística, a abordagem documental e a atenção aos detalhes.</p>
       </div>
-      <aside class="about-note">
+      <div class="about-side">
+        <img class="about-portrait" src="assets/images/Carla4.jpg" alt="Carla Cardoso Uchôa smiling while holding a camera and smartphone">
+        <aside class="about-note">
         <p class="eyebrow">A abordagem</p>
         <p>Imagens honestas, observação cuidadosa e espaço para o inesperado.</p>
-      </aside>
+        </aside>
+      </div>
     </div>
+
+    <section class="services-section" aria-label="Services offered">
+      <p class="eyebrow">Serviços</p>
+      <div class="services-grid">
+        <article class="service-card">
+          <span class="service-index">-</span>
+          <h2>Fotografia</h2>
+          <p>Retratos e imagens com uma linguagem natural e contemporânea.</p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-index">-</span>
+          <h2>Videomaking</h2>
+          <p>Produção visual com narrativa clara, movimento elegante e atenção aos detalhes que marcam a emoção.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
