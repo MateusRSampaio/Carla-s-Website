@@ -98,46 +98,89 @@ if (navToggle && siteNav) {
   });
 }
 
-const galleryItems = document.querySelectorAll('.gallery-item');
-const lightbox = document.querySelector('.lightbox');
-const lightboxImage = document.querySelector('.lightbox-image');
-const lightboxCaption = document.querySelector('.lightbox-caption');
-const lightboxClose = document.querySelector('.lightbox-close');
+const albumCards = document.querySelectorAll('.album-card');
+const albumViewer = document.querySelector('.album-viewer');
+const viewerImage = document.querySelector('.viewer-image');
+const viewerCaption = document.querySelector('.viewer-caption');
+const viewerCounter = document.querySelector('.viewer-counter');
+const viewerClose = document.querySelector('.viewer-close');
+const viewerPrev = document.querySelector('.viewer-prev');
+const viewerNext = document.querySelector('.viewer-next');
 
-if (galleryItems.length && lightbox && lightboxImage && lightboxCaption && lightboxClose) {
-  galleryItems.forEach((item) => {
-    item.addEventListener('click', () => {
-      const image = item.querySelector('img');
-      const title = item.dataset.title || 'Portfolio image';
-      const caption = item.dataset.caption || image?.alt || 'Portfolio image';
+if (albumCards.length && albumViewer && viewerImage && viewerCaption && viewerCounter && viewerClose && viewerPrev && viewerNext) {
+  let activePhotos = [];
+  let activeIndex = 0;
+  let activeCard = null;
 
-      if (!image) return;
+  const showPhoto = (index) => {
+    const photo = activePhotos[index];
+    if (!photo) return;
 
-      lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt;
-      lightboxCaption.textContent = `${title} — ${caption}`;
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+    activeIndex = index;
+    viewerImage.src = photo.src;
+    viewerImage.alt = photo.alt;
+    viewerCaption.textContent = photo.caption;
+    viewerCounter.textContent = `${index + 1} / ${activePhotos.length}`;
+  };
+
+  const openAlbum = (card) => {
+    const photos = Array.from(card.querySelectorAll('.album-photos img')).map((img) => ({
+      src: img.src,
+      alt: img.alt,
+      caption: img.closest('li')?.dataset.caption || img.alt,
+    }));
+
+    if (!photos.length) return;
+
+    activePhotos = photos;
+    activeCard = card;
+    showPhoto(0);
+    albumViewer.classList.add('is-open');
+    albumViewer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    viewerClose.focus();
+  };
+
+  const closeAlbum = () => {
+    albumViewer.classList.remove('is-open');
+    albumViewer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    activeCard?.focus();
+    activeCard = null;
+  };
+
+  const showNext = () => showPhoto((activeIndex + 1) % activePhotos.length);
+  const showPrev = () => showPhoto((activeIndex - 1 + activePhotos.length) % activePhotos.length);
+
+  albumCards.forEach((card) => {
+    card.addEventListener('click', () => openAlbum(card));
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openAlbum(card);
+      }
     });
   });
 
-  const closeLightbox = () => {
-    lightbox.classList.remove('is-open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
+  viewerClose.addEventListener('click', closeAlbum);
+  viewerNext.addEventListener('click', showNext);
+  viewerPrev.addEventListener('click', showPrev);
 
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (event) => {
-    if (event.target === lightbox) {
-      closeLightbox();
+  albumViewer.addEventListener('click', (event) => {
+    if (event.target === albumViewer) {
+      closeAlbum();
     }
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
-      closeLightbox();
+    if (!albumViewer.classList.contains('is-open')) return;
+
+    if (event.key === 'Escape') {
+      closeAlbum();
+    } else if (event.key === 'ArrowRight') {
+      showNext();
+    } else if (event.key === 'ArrowLeft') {
+      showPrev();
     }
   });
 }
