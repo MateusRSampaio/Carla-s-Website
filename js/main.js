@@ -1,86 +1,3 @@
-const contactForm = document.querySelector('.contact-form');
-
-if (contactForm) {
-  const successMessage = contactForm.querySelector('.form-success');
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const messageInput = document.getElementById('message');
-
-  const setFieldState = (field, message = '') => {
-    const errorEl = contactForm.querySelector(`[data-error-for="${field.name}"]`);
-
-    if (errorEl) {
-      errorEl.textContent = message;
-    }
-
-    if (message) {
-      field.classList.add('invalid');
-    } else {
-      field.classList.remove('invalid');
-    }
-  };
-
-  const validateField = (field) => {
-    const value = field.value.trim();
-
-    if (!value) {
-      setFieldState(field, 'This field is required.');
-      return false;
-    }
-
-    if (field.type === 'email') {
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!emailPattern.test(value)) {
-        setFieldState(field, 'Please enter a valid email address.');
-        return false;
-      }
-    }
-
-    setFieldState(field);
-    return true;
-  };
-
-  [nameInput, emailInput, messageInput].forEach((field) => {
-    if (!field) return;
-
-    field.addEventListener('input', () => {
-      validateField(field);
-      if (successMessage) {
-        successMessage.textContent = '';
-      }
-    });
-  });
-
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const isNameValid = validateField(nameInput);
-    const isEmailValid = validateField(emailInput);
-    const isMessageValid = validateField(messageInput);
-
-    if (!isNameValid || !isEmailValid || !isMessageValid) {
-      if (successMessage) {
-        successMessage.textContent = '';
-      }
-      return;
-    }
-
-    if (successMessage) {
-      successMessage.textContent = 'Your message has been sent successfully.';
-    }
-
-    contactForm.reset();
-    [nameInput, emailInput, messageInput].forEach((field) => {
-      if (!field) return;
-      field.classList.remove('invalid');
-    });
-    contactForm.querySelectorAll('.error-message').forEach((el) => {
-      el.textContent = '';
-    });
-  });
-}
-
 const navToggle = document.querySelector('.nav-toggle');
 const siteNav = document.querySelector('.site-nav');
 
@@ -180,6 +97,29 @@ if (albumCards.length && albumViewer && viewerImage && viewerCaption && viewerCo
     } else if (event.key === 'ArrowRight') {
       showNext();
     } else if (event.key === 'ArrowLeft') {
+      showPrev();
+    }
+  });
+
+  const viewerContent = document.querySelector('.viewer-content');
+  const swipeThreshold = 40;
+  let touchStartX = null;
+
+  viewerContent?.addEventListener('touchstart', (event) => {
+    touchStartX = event.touches[0].clientX;
+  });
+
+  viewerContent?.addEventListener('touchend', (event) => {
+    if (touchStartX === null) return;
+
+    const deltaX = event.changedTouches[0].clientX - touchStartX;
+    touchStartX = null;
+
+    if (Math.abs(deltaX) < swipeThreshold) return;
+
+    if (deltaX < 0) {
+      showNext();
+    } else {
       showPrev();
     }
   });
